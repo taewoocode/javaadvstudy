@@ -1,5 +1,9 @@
 package thread.control;
 
+import util.ThreadUtils;
+
+import static util.ThreadUtils.sleep;
+
 public class CheckedExceptionMain {
     public static void main(String[] args) throws Exception {
         throw new Exception();
@@ -19,11 +23,7 @@ public class CheckedExceptionMain {
         //자식예외는 던질 수 있음
         @Override
         public void run() {
-            throw new RuntimeException();
+            sleep( 1000 );
         }
     }
-
-
-
-
 }
