@@ -14,5 +14,16 @@ public class CheckedExceptionMain {
         }
     }*/
 
+    static class CheckedRunnable implements Runnable {
+
+        //자식예외는 던질 수 있음
+        @Override
+        public void run() {
+            throw new RuntimeException();
+        }
+    }
+
+
+
 
 }
