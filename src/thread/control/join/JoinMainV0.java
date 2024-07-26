@@ -19,7 +19,6 @@ public class JoinMainV0 {
             log( "작업 시작" );
             sleep( 2000 ); //2초간 대기
             log( "작업 완료" );
-
         }
     }
 }
