@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import static util.MyLogger.log;
 import static util.ThreadUtils.sleep;
 
-public class MyPrinterV1 {
+public class MyPrinterV2 {
     public static void main(String[] args) {
         Printer printer = new Printer();
         Thread printerThread = new Thread( printer, "printer" );
@@ -19,6 +19,7 @@ public class MyPrinterV1 {
             String input = userInput.nextLine();
             if (input.equals( "q" )) {
                 printer.work = false;
+                printerThread.interrupt();
                 break;
             }
             printer.addJob( input );
@@ -32,15 +33,19 @@ public class MyPrinterV1 {
 
         @Override
         public void run() {
-            while (work) {
+            while (!Thread.interrupted()) {
                 if (jobQueue.isEmpty()) {
                     continue;
                 }
-
-                String job = jobQueue.poll(); //poll메서드는 최상위 요소를 반환하고 제거한다.
-                log("출력시작: " + job + ", 대기 문서: " + jobQueue );
-                sleep( 3000 );
-                log( "출력 완료" );
+                try {
+                    String job = jobQueue.poll(); //poll메서드는 최상위 요소를 반환하고 제거한다.
+                    log("출력시작: " + job + ", 대기 문서: " + jobQueue );
+                    Thread.sleep( 3000 );
+                    log( "출력 완료" );
+                } catch (InterruptedException e) {
+                    log( "인터럽트!" );
+                    break;
+                }
             }
             log( "프린터 종료" );
         }
