@@ -45,7 +45,7 @@ public class JoinMainV3 {
             log( "작업 시작" );
             sleep( 2000 );
             int sum = 0;
-            for (int i = startValue; i < endValue; i++) {
+            for (int i = startValue; i <= endValue; i++) {
                 sum += i;
             }
             result = sum;
