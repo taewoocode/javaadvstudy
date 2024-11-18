@@ -1,4 +1,4 @@
-package thread.collection;
+package thread.collection.simple.list;
 
 public class SimpleListMainV1 {
     public static void main(String[] args) {
